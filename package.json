@@ -1,0 +1,16 @@
+{
+  "name": "ctf-discord-bot",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^22.14.0",
+    "discord.js": "^14.18.0",
+    "typescript": "^5.8.3"
+  }
+}
