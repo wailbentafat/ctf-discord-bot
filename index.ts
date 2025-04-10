@@ -28,7 +28,7 @@ const userProgress = new Map<string, number>();
 const flags = [
   "HACKIWHA{h1dd3n_4dm1n_p4n3l_f0und}",
   "HACKIWHA{l1n4s_pyth0n_scr1pt_cr4ck3d}",
-  "HACKIWHA{4l1_w4s_1n_c0nst4nt1n3}",
+  "HACKIWHA{4l1_w4s_1n_b0u1r4}",
   "HACKIWHA{bl0g_c00k13_t4mp3r3d}",
   "HACKIWHA{m0rs3_c0d3_d3c0d3d}",
   "HACKIWHA{g1t_h1st0ry_n3v3r_l13s}",
