@@ -5,6 +5,7 @@ import {
   User,
   ChannelType,
   Partials,
+  AttachmentBuilder,
 } from "discord.js";
 const token =
   process.env.BOT_TOKEN ||
@@ -34,6 +35,11 @@ const flags = [
   "HACKIWHA{g1t_h1st0ry_n3v3r_l13s}",
 ];
 
+const publicFiles = {
+  script: new AttachmentBuilder("./public/lina_challenge.rar"),
+  warning: new AttachmentBuilder("./public/sofia_challenge.rar"),
+};
+
 const challengeParts = [
   {
     description:
@@ -53,7 +59,7 @@ const challengeParts = [
       "A suspicious Python script has been found on the victim's computer. It appears to be from Lina Douri, " +
       "Mohammed's former partner at Phobos Labs. The script is password-protected and might contain crucial evidence.\n\n" +
       "💡 *Hint: Check for common encryption patterns in the bytecode.*\n\n" +
-      "📁 **Starting Point:** Check the file in 'public/script.py'\n\n" +
+      "📁 **Starting Point:** Check the attached file 'lina_challenge.rar'\n\n" +
       "Submit the flag after cracking the script.",
     flag: flags[1],
   },
@@ -88,7 +94,7 @@ const challengeParts = [
       "Sophia Reeda, who was suspiciously present near the lab that morning, " +
       "might have witnessed something crucial. The audio file contains a hidden Morse code message.\n\n" +
       "💡 *Hint: Listen carefully between the lines.*\n\n" +
-      "📁 **Starting Point:** Check the file in 'public/warning.wav'\n\n" +
+      "📁 **Starting Point:** Check the attached file 'sofia_challenge.rar'\n\n" +
       "Submit the flag after decoding the audio message.",
     flag: flags[4],
   },
@@ -207,7 +213,20 @@ client.on("messageCreate", async (message: Message) => {
     } else if (message.content.toLowerCase() === "start") {
       const progress = userProgress.get(message.author.id) || 0;
       if (progress < challengeParts.length) {
-        message.channel.send(challengeParts[progress].description);
+        // Send description with attachment for challenges 2 and 5
+        if (progress === 1) {
+          await message.channel.send({
+            content: challengeParts[progress].description,
+            files: [publicFiles.script],
+          });
+        } else if (progress === 4) {
+          await message.channel.send({
+            content: challengeParts[progress].description,
+            files: [publicFiles.warning],
+          });
+        } else {
+          message.channel.send(challengeParts[progress].description);
+        }
       }
     } else {
       const progress = userProgress.get(message.author.id);
