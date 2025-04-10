@@ -123,10 +123,10 @@ const eliminationMessages = [
     "Airport records are conclusive.\n\n" +
     "📝 **Evidence Found:**\n" +
     "• Multiple CCTV footage timestamps\n" +
-    "• Constantine Airport security logs\n" +
+    "• Bouira Airport security logs\n" +
     "• Hotel check-in records (April 4-5)\n" +
     "• Phone tower triangulation data\n" +
-    "Ali was 300km away - physically impossible to be involved.",
+    "Ali was 150km away - physically impossible to be involved.",
 
   "⚠️ **Rayane's Blog Uncovered**\n" +
     "The blog reveals a calculated plan.\n\n" +
