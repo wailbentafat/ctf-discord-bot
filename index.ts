@@ -42,6 +42,7 @@ const challengeParts = [
       "You've gained access to the university's systems. Professor Jamel, known for his rigid methods and dark past in cyber-intelligence, " +
       "might have left traces in a hidden admin panel.\n\n" +
       "💡 *Hint: Sometimes the most secure panels are hidden in plain sight.*\n\n" +
+      "🌐 **Starting Point:** https://usthb-admin-panel.onrender.com/\n\n" +
       "Submit the flag when you find the hidden message.",
     flag: flags[0],
   },
@@ -52,6 +53,7 @@ const challengeParts = [
       "A suspicious Python script has been found on the victim's computer. It appears to be from Lina Douri, " +
       "Mohammed's former partner at Phobos Labs. The script is password-protected and might contain crucial evidence.\n\n" +
       "💡 *Hint: Check for common encryption patterns in the bytecode.*\n\n" +
+      "📁 **Starting Point:** Check the file in 'public/script.py'\n\n" +
       "Submit the flag after cracking the script.",
     flag: flags[1],
   },
@@ -62,6 +64,7 @@ const challengeParts = [
       "A burner phone found near the lab might belong to Ali 'The Coder'. Extract the GPS data " +
       "to verify his whereabouts during the murder.\n\n" +
       "💡 *Hint: Metadata never lies.*\n\n" +
+      "🌐 **Starting Point:** https://ali-coder.onrender.com/\n\n" +
       "Submit the flag after analyzing the location data.",
     flag: flags[2],
   },
@@ -73,6 +76,7 @@ const challengeParts = [
       "The visible content looks normal, but there might be hidden data about a USB drive plan " +
       "behind tampered cookies.\n\n" +
       "💡 *Hint: Cookie manipulation can reveal hidden content.*\n\n" +
+      "🌐 **Starting Point:** https://rc-blog.onrender.com/\n\n" +
       "Submit the flag after accessing the hidden blog draft.",
     flag: flags[3],
   },
@@ -84,6 +88,7 @@ const challengeParts = [
       "Sophia Reeda, who was suspiciously present near the lab that morning, " +
       "might have witnessed something crucial. The audio file contains a hidden Morse code message.\n\n" +
       "💡 *Hint: Listen carefully between the lines.*\n\n" +
+      "📁 **Starting Point:** Check the file in 'public/warning.wav'\n\n" +
       "Submit the flag after decoding the audio message.",
     flag: flags[4],
   },
@@ -131,7 +136,7 @@ const eliminationMessages = [
     '• Decoded Message: "RAYANE DID IT"\n' +
     "• Timestamp: April 5, 7:00 AM\n" +
     "• Additional Data Found: GitHub Repository Link\n" +
-    '"https://github.com/USTHB-SecResearch/project-2025"\n\n' +
+    '"https://github.com/z-sohaib/mohamed-research-project"\n\n' +
     "**🔍 Next Step:**\n" +
     "The repository might contain the final evidence we need.\n" +
     "Check the git history, particularly around April 4-5...\n" +
