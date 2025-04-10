@@ -9,7 +9,7 @@ def xor_encrypt(message: str, key: str) -> str:
     return ''.join(f"{ord(m) ^ ord(k):02x}" for m, k in zip(message, extended_key))
 
 # Professor's threat
-message = "Your project is unethical. I will stop you. --J.O."
+message = "Your project is unethical. I will stop you. --J.O. HACKIWHA{h1dd3n_4dm1n_p4n3l_f0und}"
 key = "usthb404"  # Key hint hidden in HTTP headers
 encrypted_msg = xor_encrypt(message, key)
 
