@@ -1,11 +1,10 @@
-s = "==VVNCIHJlYWR5LiBUb25pZ2h0LCBpdCBlbmRzLg"
+s = "==0HZzI3Mw1GN091MxsGMwM2XnBDbitXQIdVSLNUQIBiLzRmblBCdpBCL0h2Zp52bUBiL5RWYlJHICNVV"
 
 reversed_s = s[::-1]
 print(reversed_s)
 
 
-reversed = "gLzRmblBCdpBCL0h2Zp52bUBiL5RWYlJHICNVV=="
-
+reversed = "VVNCIHJlYWR5LiBUb25pZ2h0LCBpdCBlbmRzLiBIQUNLSVdIQXtibDBnX2MwMGsxM190NG1wM3IzZH0=="
 
 reversed_with_special = ""
 
