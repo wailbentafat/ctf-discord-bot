@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 
 # Challenge Configuration
-FLAG = "HACKIWAH{ALI_WAS_IN_BOUIRA_7:45AM}"
+FLAG = "HACKIWHA{4l1_w4s_1n_b0u1r4}"
 ALIBI_LOCATION = (36.3750, 4.9000)
 ALIBI_TIME = "2025-04-05 07:45"
 CRIME_TIME = datetime(2025, 4, 5, 8, 0)
