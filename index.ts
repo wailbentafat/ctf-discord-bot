@@ -36,8 +36,8 @@ const flags = [
 ];
 
 const publicFiles = {
-  script: new AttachmentBuilder("./public/lina_challenge.rar"),
-  warning: new AttachmentBuilder("./public/sofia_challenge.rar"),
+  lina: new AttachmentBuilder("./public/lina_challenge.rar"),
+  sofia: new AttachmentBuilder("./public/sofia_challenge.rar"),
 };
 
 const challengeParts = [
@@ -213,16 +213,15 @@ client.on("messageCreate", async (message: Message) => {
     } else if (message.content.toLowerCase() === "start") {
       const progress = userProgress.get(message.author.id) || 0;
       if (progress < challengeParts.length) {
-        // Send description with attachment for challenges 2 and 5
         if (progress === 1) {
           await message.channel.send({
             content: challengeParts[progress].description,
-            files: [publicFiles.script],
+            files: [publicFiles.lina],
           });
         } else if (progress === 4) {
           await message.channel.send({
             content: challengeParts[progress].description,
-            files: [publicFiles.warning],
+            files: [publicFiles.sofia],
           });
         } else {
           message.channel.send(challengeParts[progress].description);
@@ -235,7 +234,6 @@ client.on("messageCreate", async (message: Message) => {
         const isGitHubFlag = message.content.trim() === flags[flags.length - 1];
 
         if (isLastChallenge && message.content.trim() === flags[progress]) {
-          // Show Morse code results and GitHub challenge
           message.channel.send(
             "🎉 **Correct!**\n\n" +
               eliminationMessages[progress] +
@@ -244,7 +242,6 @@ client.on("messageCreate", async (message: Message) => {
               "Examine the GitHub repository to find the last piece of evidence..."
           );
         } else if (isLastChallenge && isGitHubFlag) {
-          // Show confession and case summary
           message.channel.send(
             eliminationMessages[eliminationMessages.length - 1]
           );
@@ -269,16 +266,35 @@ client.on("messageCreate", async (message: Message) => {
           !isLastChallenge &&
           message.content.trim() === challengeParts[progress].flag
         ) {
-          // Regular challenge completion
           const newProgress = progress + 1;
           userProgress.set(message.author.id, newProgress);
-          message.channel.send(
-            "🎉 **Correct!**\n\n" +
-              eliminationMessages[progress] +
-              "\n\n" +
-              "Moving to the next part...\n\n" +
-              challengeParts[newProgress].description
-          );
+
+          if (newProgress === 1) {
+            await message.channel.send({
+              content:
+                "🎉 **Correct!**\n\n" +
+                eliminationMessages[progress] +
+                "\n\nMoving to the next part...\n\n" +
+                challengeParts[newProgress].description,
+              files: [publicFiles.lina],
+            });
+          } else if (newProgress === 4) {
+            await message.channel.send({
+              content:
+                "🎉 **Correct!**\n\n" +
+                eliminationMessages[progress] +
+                "\n\nMoving to the next part...\n\n" +
+                challengeParts[newProgress].description,
+              files: [publicFiles.sofia],
+            });
+          } else {
+            message.channel.send(
+              "🎉 **Correct!**\n\n" +
+                eliminationMessages[progress] +
+                "\n\nMoving to the next part...\n\n" +
+                challengeParts[newProgress].description
+            );
+          }
         } else {
           message.channel.send("❌ That's not the correct flag. Try again!");
         }
