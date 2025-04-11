@@ -7,25 +7,41 @@ import {
   Partials,
   AttachmentBuilder,
 } from "discord.js";
+import { config } from "dotenv";
+import { connectDB, CompletionModel } from "./db/completion";
+
+config(); // Load environment variables
+connectDB(); // Connect to MongoDB
+
 const token =
   process.env.BOT_TOKEN ||
   "MTM1OTI5NDc2NTA2NTE3OTI3OA.GhdN5L.02TnwfVrbIkHZlGKnv2apux5o-JBDbIxmlKPSY";
-const serverId = "1242893151459610666";
-const channelId = "1242893151933563031";
+const serverId = "1300126425965264936";
+const channelId = "1300126427030753312";
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessageTyping,
     GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.DirectMessageTyping,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMessageReactions,
   ],
-  partials: [Partials.Channel],
+  partials: [
+    Partials.Channel,
+    Partials.Message,
+    Partials.User,
+    Partials.GuildMember,
+    Partials.Reaction,
+  ],
 });
 
 const awaitingName = new Set<string>();
 const userProgress = new Map<string, number>();
+const userFullNames = new Map<string, string>();
 const flags = [
   "HACKIWHA{h1dd3n_4dm1n_p4n3l_f0und}",
   "HACKIWHA{l1n4s_pyth0n_scr1pt_cr4ck3d}",
@@ -132,11 +148,6 @@ const eliminationMessages = [
     "The blog reveals a calculated plan.\n\n" +
     "📝 **Key Evidence Found:**\n" +
     "• Blog draft dated April 5, 2:00 AM\n" +
-    '• Direct quote: "USB plan ready. Tonight everything changes."\n' +
-    "• Multiple posts about financial struggles\n" +
-    "But with Sophia's earlier threat, could this be misdirection?",
-
-  "❗ **Morse Code Decoded**\n" +
     "The audio message reveals a shocking truth...\n\n" +
     "📝 **Critical Evidence:**\n" +
     '• Decoded Message: "RAYANE DID IT"\n' +
@@ -170,8 +181,14 @@ client.once("ready", () => {
     return console.error(" Channel not found or not text-based.");
 
   channel
-    .send("Hello, this is my message!")
-    .then(() => console.log("📨 Message sent successfully!"))
+    .send(
+      "🔍 **Welcome to The Silent Byte - A Cybersecurity Murder Mystery**\n\n" +
+        "Are you ready to solve a complex case involving cybercrime and murder?\n" +
+        "Use `/iamready` to begin your investigation.\n\n" +
+        "**Note:** Make sure your DMs are open to receive case details.\n" +
+        "Good luck, Detective! 🕵️"
+    )
+    .then(() => console.log("📨 Welcome message sent successfully!"))
     .catch((err) => console.error(" Error sending message:", err));
 });
 
@@ -206,6 +223,7 @@ client.on("messageCreate", async (message: Message) => {
           `Thank you, ${fullName}! The investigation will begin shortly.`
         );
         awaitingName.delete(user.id);
+        userFullNames.set(user.id, fullName); // Store the full name
         startInvestigation(user, fullName);
       } catch (err) {
         console.error(" Error responding in DM:", err);
@@ -245,6 +263,19 @@ client.on("messageCreate", async (message: Message) => {
           message.channel.send(
             eliminationMessages[eliminationMessages.length - 1]
           );
+
+          // Save completion to MongoDB
+          try {
+            const fullName = userFullNames.get(message.author.id) || "Unknown";
+            await CompletionModel.create({
+              username: message.author.username,
+              fullName: fullName,
+            });
+            console.log(`Saved completion for ${message.author.username}`);
+          } catch (err) {
+            console.error("Failed to save completion:", err);
+          }
+
           message.channel.send(
             "🎉 **Case Solved: The Silent Byte**\n\n" +
               "**Case Summary:**\n" +
